@@ -19,14 +19,19 @@ export default function OrderInquiryPage() {
         const formData = new FormData(e.target)
 
         try {
-            const response = await fetch('/', {
+            const response = await fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams(formData).toString()
+                body: formData
             })
 
-            if (response.ok) {
-                window.location.href = '/thank-you'
+            const data = await response.json()
+
+            if (data.success) {
+                setStatus('success')
+                e.target.reset()
+                setTimeout(() => {
+                    window.location.href = '/thank-you'
+                }, 2000)
             } else {
                 setStatus('error')
             }
@@ -68,20 +73,15 @@ export default function OrderInquiryPage() {
                             and get back to you within 24 hours with a competitive quote.
                         </p>
 
-                        <form
-                            name="order-inquiry"
-                            method="POST"
-                            data-netlify="true"
-                            data-netlify-honeypot="bot-field"
-                            onSubmit={handleSubmit}
-                            className={styles.form}
-                        >
-                            <input type="hidden" name="form-name" value="order-inquiry" />
-                            <p hidden>
-                                <label>
-                                    Don't fill this out: <input name="bot-field" />
-                                </label>
-                            </p>
+                        <form onSubmit={handleSubmit} className={styles.form}>
+                            {/* Web3Forms Access Key */}
+                            <input type="hidden" name="access_key" value="cd23b9fe-6b37-4500-aeb1-46cf5326acad" />
+
+                            {/* Redirect after submission */}
+                            <input type="hidden" name="redirect" value="https://regal-traders.vercel.app/thank-you" />
+
+                            {/* Subject for email */}
+                            <input type="hidden" name="subject" value="New Order Inquiry from Regal Traders Website" />
 
                             <div className={styles.formRow}>
                                 <div className={styles.formGroup}>
@@ -96,11 +96,12 @@ export default function OrderInquiryPage() {
                                 </div>
 
                                 <div className={styles.formGroup}>
-                                    <label htmlFor="email">Email</label>
+                                    <label htmlFor="email">Email *</label>
                                     <input
                                         type="email"
                                         id="email"
                                         name="email"
+                                        required
                                         className={styles.input}
                                     />
                                 </div>
@@ -172,6 +173,12 @@ export default function OrderInquiryPage() {
                             <Button type="submit" variant="primary" size="xl" className={styles.submitButton} disabled={status === 'sending'}>
                                 {status === 'sending' ? 'Submitting...' : 'Submit Inquiry'}
                             </Button>
+
+                            {status === 'success' && (
+                                <div className={styles.successMessage}>
+                                    ✓ Thank you! We've received your inquiry and will contact you within 24 hours.
+                                </div>
+                            )}
 
                             {status === 'error' && (
                                 <div className={styles.errorMessage}>
