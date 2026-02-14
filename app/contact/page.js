@@ -1,4 +1,4 @@
-'use client'
+//'use client'
 
 import { generatePageMetadata } from '@/lib/seo'
 import Container from '../components/ui/Container'
