@@ -127,7 +127,7 @@ export default function PlasticGarbageBinsPage() {
                             Industrial <strong>Garbage Bins in Bangalore</strong> for effective waste management.
                             Our heavy-duty, UV-resistant dustbins are trusted by Municipal Corporations and commercial complexes across India.
                         </p>
-                        <Button href="/bulk-order" variant="primary" size="lg">
+                        <Button href="/order-inquiry" variant="primary" size="lg">
                             Request Quote
                         </Button>
                     </div>
@@ -257,7 +257,7 @@ export default function PlasticGarbageBinsPage() {
                             Get competitive wholesale pricing for municipal and commercial projects.
                         </p>
                         <div className={styles.ctaActions}>
-                            <Button href="/bulk-order" variant="white" size="xl">
+                            <Button href="/order-inquiry" variant="white" size="xl">
                                 Request Quote
                             </Button>
                             <Button href="/contact" variant="secondary" size="xl">

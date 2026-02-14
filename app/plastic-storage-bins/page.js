@@ -188,7 +188,7 @@ export default function PlasticStorageBinsPage() {
                             Premier customized <strong>Plastic Storage Bins in Bangalore</strong> for efficient inventory management.
                             Durable, front-open, and stackable bins designed for warehouses, electronics, and automotive industries across India.
                         </p>
-                        <Button href="/bulk-order" variant="primary" size="lg">
+                        <Button href="/order-inquiry" variant="primary" size="lg">
                             Request Quote
                         </Button>
                     </div>
@@ -321,7 +321,7 @@ export default function PlasticStorageBinsPage() {
                             Get competitive wholesale pricing for warehouse and industrial projects.
                         </p>
                         <div className={styles.ctaActions}>
-                            <Button href="/bulk-order" variant="white" size="xl">
+                            <Button href="/order-inquiry" variant="white" size="xl">
                                 Request Quote
                             </Button>
                             <Button href="/contact" variant="secondary" size="xl">

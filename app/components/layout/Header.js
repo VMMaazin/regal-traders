@@ -55,7 +55,7 @@ export default function Header() {
                         Download Catalogue
                     </Button>
 
-                    <Button href="/bulk-order" variant="primary" size="sm">
+                    <Button href="/order-inquiry" variant="primary" size="sm">
                         Request Quote
                     </Button>
 

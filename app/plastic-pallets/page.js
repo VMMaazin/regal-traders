@@ -86,7 +86,7 @@ export default function PlasticPalletsPage() {
                             Our heavy-duty pallets are trusted by industries nationwide for optimizing warehousing and supply chain operations.
                             From 9-legged lightweight designs for exports to 3-runner heavyweight models for racking, we provide robust solutions across India.
                         </p>
-                        <Button href="/bulk-order" variant="primary" size="lg">
+                        <Button href="/order-inquiry" variant="primary" size="lg">
                             Request Bulk Quote
                         </Button>
                     </div>
@@ -219,7 +219,7 @@ export default function PlasticPalletsPage() {
                             Regal Traders offers the best rates for bulk orders with guaranteed quality and timely delivery.
                         </p>
                         <div style={{ display: 'flex', gap: '20px', justifyContent: 'center' }}>
-                            <Button href="/bulk-order" variant="primary" size="xl">
+                            <Button href="/order-inquiry" variant="primary" size="xl">
                                 Request Bulk Quote
                             </Button>
                             <Button href="/contact" variant="outline" size="xl" style={{ border: '2px solid white', color: 'white' }}>

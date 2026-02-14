@@ -24,7 +24,7 @@ export default function PlasticCratesPage() {
                             As leading <strong>plastic crate manufacturers in Bangalore</strong>, we supply robust storage solutions across India.
                             From <strong>Peenya Industrial Area</strong> to logistics hubs in <strong>Mumbai, Delhi, and Chennai</strong>, our heavy-duty crates optimize supply chains nationwide.
                         </p>
-                        <Button href="/bulk-order" variant="primary" size="lg">
+                        <Button href="/order-inquiry" variant="primary" size="lg">
                             Request Bulk Quote
                         </Button>
                     </div>
@@ -282,7 +282,7 @@ export default function PlasticCratesPage() {
                             From stackable retail crates to heavy-duty industrial bins, we have the right solutions at the best prices.
                         </p>
                         <div style={{ display: 'flex', gap: '20px', justifyContent: 'center' }}>
-                            <Button href="/bulk-order" variant="primary" size="xl">
+                            <Button href="/order-inquiry" variant="primary" size="xl">
                                 Request Bulk Quote
                             </Button>
                             <Button href="/contact" variant="outline" size="xl" style={{ border: '2px solid white', color: 'white' }}>

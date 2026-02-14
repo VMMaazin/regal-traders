@@ -21,6 +21,6 @@ module.exports = {
         { loc: '/poultry-equipment', changefreq: 'weekly', priority: 0.9 },
         { loc: '/about', changefreq: 'monthly', priority: 0.7 },
         { loc: '/contact', changefreq: 'monthly', priority: 0.8 },
-        { loc: '/bulk-order', changefreq: 'monthly', priority: 0.8 },
+        { loc: '/order-inquiry', changefreq: 'monthly', priority: 0.8 },
     ],
 }

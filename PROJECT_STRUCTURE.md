@@ -23,7 +23,7 @@ The project follows the [Next.js App Router](https://nextjs.org/docs/app) archit
 Each subdirectory in `app/` (except `components`) represents a route:
 - `app/page.js`: Homepage.
 - `app/about/`: About Us page.
-- `app/bulk-order/`: Bulk/Wholesale inquiry form.
+- `app/order-inquiry/`: Bulk/Wholesale inquiry form.
 - `app/contact/`: Contact information page.
 - `app/plastic-crates/`: Product category page for crates.
 - `app/plastic-garbage-bins/`: Product category page for garbage bins.

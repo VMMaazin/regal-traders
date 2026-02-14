@@ -66,7 +66,7 @@ export default function ProductCard({
                 )}
 
                 <div className={styles.productCta}>
-                    <Button href="/bulk-order" variant="primary" size="md" className={styles.ctaButton}>
+                    <Button href="/order-inquiry" variant="primary" size="md" className={styles.ctaButton}>
                         Request Quote
                     </Button>
                 </div>

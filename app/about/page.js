@@ -142,7 +142,7 @@ export default function AboutPage() {
                             <Button href="/contact" variant="primary" size="xl">
                                 Contact Us
                             </Button>
-                            <Button href="/bulk-order" variant="outline" size="xl">
+                            <Button href="/order-inquiry" variant="outline" size="xl">
                                 Request Quote
                             </Button>
                         </div>

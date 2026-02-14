@@ -105,7 +105,7 @@ export default function Home() {
                                 View Product Catalogue
                             </Button>
 
-                            <Button href="/bulk-order" variant="primary" size="xl">
+                            <Button href="/order-inquiry" variant="primary" size="xl">
                                 Request Quote
                             </Button>
                         </div>
@@ -172,7 +172,7 @@ export default function Home() {
                             Please Fill out the form  with your requirements. Our team will review your inquiry and get back to you within 24 hours with a competitive quote.
                         </p>
 
-                        <Button href="/bulk-order" variant="primary" size="xl">
+                        <Button href="/order-inquiry" variant="primary" size="xl">
                             Request Quote
                         </Button>
                     </div>

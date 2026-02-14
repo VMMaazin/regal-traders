@@ -127,7 +127,7 @@ export default function PoultryEquipmentPage() {
                             High-quality <strong>Poultry Equipment in Bangalore</strong> for modern farms.
                             We manufacture durable <strong>Poultry Feeders and Drinkers</strong> (Automatic & Manual) for broilers and layers across India.
                         </p>
-                        <Button href="/bulk-order" variant="primary" size="lg">
+                        <Button href="/order-inquiry" variant="primary" size="lg">
                             Request Quote
                         </Button>
                     </div>
@@ -262,7 +262,7 @@ export default function PoultryEquipmentPage() {
                             Get competitive wholesale pricing for your poultry farm. Contact us today.
                         </p>
                         <div className={styles.ctaActions}>
-                            <Button href="/bulk-order" variant="white" size="xl">
+                            <Button href="/order-inquiry" variant="white" size="xl">
                                 Request Quote
                             </Button>
                             <Button href="/contact" variant="secondary" size="xl">
