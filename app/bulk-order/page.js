@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import Container from '../components/ui/Container'
 import Section from '../components/ui/Section'
 import SectionDivider from '../components/ui/SectionDivider'
@@ -9,6 +10,32 @@ import { PhoneIcon, WhatsAppIcon } from '../components/ui/Icons'
 import styles from './bulk-order.module.css'
 
 export default function BulkOrderPage() {
+    const [status, setStatus] = useState('')
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        setStatus('sending')
+
+        const formData = new FormData(e.target)
+
+        try {
+            const response = await fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(formData).toString()
+            })
+
+            if (response.ok) {
+                window.location.href = '/thank-you'
+            } else {
+                setStatus('error')
+            }
+        } catch (error) {
+            console.error('Form error:', error)
+            setStatus('error')
+        }
+    }
+
     const benefits = [
         { title: 'Wholesale Pricing', description: 'Competitive rates for bulk quantities', icon: '₹' },
         { title: 'Custom Solutions', description: 'Tailored products for your specific needs', icon: '⚙' },
@@ -44,11 +71,17 @@ export default function BulkOrderPage() {
                         <form
                             name="bulk-order"
                             method="POST"
-                            action="/thank-you"
                             data-netlify="true"
+                            data-netlify-honeypot="bot-field"
+                            onSubmit={handleSubmit}
                             className={styles.form}
                         >
                             <input type="hidden" name="form-name" value="bulk-order" />
+                            <p hidden>
+                                <label>
+                                    Don't fill this out: <input name="bot-field" />
+                                </label>
+                            </p>
 
                             <div className={styles.formRow}>
                                 <div className={styles.formGroup}>
@@ -136,9 +169,15 @@ export default function BulkOrderPage() {
                                 />
                             </div>
 
-                            <Button type="submit" variant="primary" size="xl" className={styles.submitButton}>
-                                Submit Inquiry
+                            <Button type="submit" variant="primary" size="xl" className={styles.submitButton} disabled={status === 'sending'}>
+                                {status === 'sending' ? 'Submitting...' : 'Submit Inquiry'}
                             </Button>
+
+                            {status === 'error' && (
+                                <div className={styles.errorMessage}>
+                                    ✗ Sorry, there was an error. Please try again or contact us directly.
+                                </div>
+                            )}
                         </form>
                     </div>
                 </Container>
