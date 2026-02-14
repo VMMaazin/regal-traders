@@ -1,0 +1,99 @@
+.card {
+    background: #FFFFFF;
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-6);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    transition: all var(--transition-base);
+    height: 100%;
+    border: 1px solid #E5E5E5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+    border-color: var(--color-primary);
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+/* Card with Image Styles */
+.cardWithImage {
+    padding: 0;
+}
+
+.cardImage {
+    width: 100%;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    background: #F5F5F5;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-base);
+}
+
+.card:hover .image {
+    transform: scale(1.05);
+}
+
+.cardContent {
+    padding: var(--spacing-6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+}
+
+/* Icon spacing for cards without images */
+.card:not(.cardWithImage) svg {
+    margin-bottom: var(--spacing-4);
+}
+
+/* Icon spacing for cards with images */
+.cardWithImage svg {
+    margin-bottom: var(--spacing-3);
+    margin-top: var(--spacing-2);
+}
+
+@media (max-width: 768px) {
+    .card {
+        padding: var(--spacing-4);
+    }
+
+    .cardWithImage {
+        padding: 0;
+    }
+
+    .cardContent {
+        padding: var(--spacing-4);
+    }
+
+    .cardImage {
+        height: 160px;
+    }
+}

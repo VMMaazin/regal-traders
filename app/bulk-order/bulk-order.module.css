@@ -1,0 +1,227 @@
+.hero {
+    color: var(--color-black);
+}
+
+.heroContent {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.heroTitle {
+    font-size: var(--font-size-5xl);
+    font-weight: 800;
+    color: var(--color-black);
+    margin-bottom: var(--spacing-4);
+}
+
+.heroSubtitle {
+    font-size: var(--font-size-xl);
+    color: #111111;
+    line-height: 1.6;
+}
+
+.sectionHeader {
+    text-align: center;
+    margin-bottom: var(--spacing-12);
+}
+
+.sectionHeader h2 {
+    font-size: var(--font-size-4xl);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-3);
+}
+
+.sectionHeader p {
+    font-size: var(--font-size-lg);
+    color: var(--color-gray-600);
+}
+
+.benefitIcon {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-4);
+    color: #E9E600;
+    text-shadow: 0 2px 8px rgba(233, 230, 0, 0.2);
+    animation: iconFloat 3s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.benefitTitle {
+    font-size: var(--font-size-xl);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-2);
+}
+
+.benefitDescription {
+    color: var(--color-gray-600);
+    line-height: 1.6;
+}
+
+.formContainer {
+    background: var(--color-white);
+    padding: var(--spacing-10);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-xl);
+}
+
+.formContainer h2 {
+    font-size: var(--font-size-3xl);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-3);
+    text-align: center;
+}
+
+.formDescription {
+    text-align: center;
+    color: var(--color-gray-600);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-8);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-5);
+}
+
+.formRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-5);
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+.formGroup label {
+    font-weight: 600;
+    color: var(--color-gray-800);
+    font-size: var(--font-size-sm);
+}
+
+.input,
+.textarea {
+    padding: var(--spacing-3) var(--spacing-4);
+    border: 2px solid #e5e5e5;
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-base);
+    font-family: var(--font-family);
+    background: #fafafa;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.input:hover,
+.textarea:hover {
+    border-color: #d4d4d4;
+    background: #ffffff;
+}
+
+.input:focus,
+.textarea:focus {
+    outline: none;
+    border-color: transparent;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(233, 230, 0, 0.2);
+    animation: borderGlow 2s ease-in-out infinite;
+}
+
+@keyframes borderGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 3px rgba(233, 230, 0, 0.2);
+    }
+
+    50% {
+        box-shadow: 0 0 0 3px rgba(233, 230, 0, 0.4), 0 0 20px rgba(233, 230, 0, 0.1);
+    }
+}
+
+.textarea {
+    resize: vertical;
+}
+
+.submitButton {
+    margin-top: var(--spacing-4);
+}
+
+.successMessage {
+    padding: var(--spacing-5);
+    background: #10B981;
+    color: var(--color-white);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    font-weight: 600;
+    font-size: var(--font-size-lg);
+}
+
+.cta {
+    color: var(--color-black);
+}
+
+.ctaContent {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.ctaTitle {
+    color: var(--color-black);
+    font-size: var(--font-size-4xl);
+    margin-bottom: var(--spacing-4);
+}
+
+.ctaDescription {
+    color: var(--color-gray-700);
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-8);
+    line-height: 1.6;
+}
+
+.ctaActions {
+    display: flex;
+    gap: var(--spacing-4);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    .heroTitle {
+        font-size: var(--font-size-4xl);
+    }
+
+    .formRow {
+        grid-template-columns: 1fr;
+    }
+
+    .formContainer {
+        padding: var(--spacing-6);
+    }
+}
+
+/* Section Dividers */
+.sectionSlice {
+    position: relative;
+    height: 60px;
+    background: white;
+}
+
+.up {
+    transform: translateY(-50%);
+    z-index: 10;
+}

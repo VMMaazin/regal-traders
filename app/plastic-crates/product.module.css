@@ -1,0 +1,379 @@
+/* ============================= */
+/* HERO SECTION */
+/* ============================= */
+
+.hero {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.heroContent {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.heroTitle {
+    font-size: var(--font-size-5xl);
+    font-weight: 800;
+    color: #FFFFFF;
+    margin-bottom: var(--spacing-4);
+}
+
+.heroSubtitle {
+    font-size: var(--font-size-xl);
+    color: #FFFFFF;
+    margin-bottom: var(--spacing-8);
+    line-height: 1.6;
+}
+
+.heroContent strong {
+    color: #FFFFFF;
+}
+
+
+/* ============================= */
+/* INTRODUCTION */
+/* ============================= */
+
+.intro {
+    font-size: var(--font-size-lg);
+    line-height: 1.8;
+    color: #444444;
+}
+
+.intro p {
+    margin-bottom: var(--spacing-6);
+}
+
+.intro strong {
+    color: #111111;
+    font-weight: 600;
+}
+
+
+/* ============================= */
+/* SECTION HEADERS */
+/* ============================= */
+
+.sectionHeader {
+    text-align: center;
+    margin-bottom: var(--spacing-12);
+}
+
+.sectionHeader h2 {
+    font-size: var(--font-size-4xl);
+    color: #111111;
+    margin-bottom: var(--spacing-3);
+}
+
+.sectionHeader p {
+    font-size: var(--font-size-lg);
+    color: #666666;
+}
+
+
+/* ============================= */
+/* INFO GRID */
+/* ============================= */
+
+.infoGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-8);
+}
+
+.infoCard {
+    text-align: left;
+}
+
+.infoCard h3 {
+    font-size: var(--font-size-xl);
+    color: #111111;
+    margin-bottom: var(--spacing-3);
+    font-weight: 600;
+}
+
+.infoCard p {
+    color: #555555;
+    line-height: 1.7;
+}
+
+
+/* ============================= */
+/* FEATURES GRID */
+/* ============================= */
+
+.featuresGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-6);
+}
+
+.featureCard {
+    text-align: center;
+}
+
+.featureIcon {
+    color: #000000;
+    margin-bottom: var(--spacing-4);
+    display: flex;
+    justify-content: center;
+    transition: color 0.2s ease;
+}
+
+.featureCard:hover .featureIcon {
+    color: var(--color-primary);
+}
+
+.featureCard h3 {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: #111111;
+    margin-bottom: var(--spacing-2);
+}
+
+.featureCard p {
+    color: #555555;
+    line-height: 1.6;
+    font-size: var(--font-size-sm);
+}
+
+
+/* ============================= */
+/* INDUSTRIES GRID */
+/* ============================= */
+
+.industriesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-6);
+}
+
+.industryCard {
+    text-align: left;
+}
+
+.industryCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    border-color: var(--color-primary);
+}
+
+.industryIcon {
+    color: #000000;
+    margin-bottom: var(--spacing-4);
+    display: flex;
+    justify-content: center;
+    transition: color 0.2s ease;
+}
+
+.industryCard:hover .industryIcon {
+    color: var(--color-primary);
+}
+
+.industryCard h3 {
+    font-size: var(--font-size-xl);
+    color: #111111;
+    margin-bottom: var(--spacing-3);
+    font-weight: 600;
+}
+
+.industryCard p {
+    color: #555555;
+    line-height: 1.6;
+}
+
+/* Industries List */
+.industries {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-4);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.industry {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-3);
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    border: 1px solid #e5e5e5;
+    transition: all 0.2s ease;
+}
+
+.industry:hover {
+    transform: translateX(4px);
+    border-color: var(--color-primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.checkmark {
+    color: var(--color-primary);
+    font-weight: bold;
+    font-size: var(--font-size-lg);
+}
+
+.industry span:last-child {
+    color: #111111;
+    font-weight: 500;
+}
+
+
+/* ============================= */
+/* PRODUCT GRID */
+/* ============================= */
+
+.productGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 28px;
+    margin-top: 40px;
+}
+
+.productCard {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.productCard:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    border-color: var(--color-primary);
+}
+
+.productImage {
+    width: 100%;
+    height: 220px;
+    object-fit: contain;
+    margin-bottom: 16px;
+}
+
+.productTitle {
+    font-size: 18px;
+    font-weight: 600;
+    color: #111111;
+    margin-bottom: 8px;
+}
+
+.productSpecs {
+    font-size: 14px;
+    color: #444444;
+    margin-bottom: 6px;
+}
+
+.productDescription {
+    font-size: 14px;
+    color: #666666;
+    margin-bottom: 16px;
+    line-height: 1.5;
+}
+
+
+/* ============================= */
+/* FAQ SECTION */
+/* ============================= */
+
+.faqContainer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-6);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.faqItem {
+    text-align: left;
+    transition: all 0.2s ease;
+}
+
+.faqItem:hover {
+    border-color: var(--color-primary);
+}
+
+.faqItem h3 {
+    font-size: var(--font-size-xl);
+    color: #111111;
+    margin-bottom: var(--spacing-3);
+    font-weight: 600;
+}
+
+.faqItem p {
+    color: #555555;
+    line-height: 1.8;
+}
+
+
+/* ============================= */
+/* CTA SECTION */
+/* ============================= */
+
+.cta {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+}
+
+.ctaContent {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.ctaTitle {
+    color: #111111;
+    font-size: var(--font-size-4xl);
+    margin-bottom: var(--spacing-4);
+}
+
+.ctaDescription {
+    color: #222222;
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-8);
+    line-height: 1.6;
+}
+
+.ctaActions {
+    display: flex;
+    gap: var(--spacing-4);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
+
+@media (max-width: 768px) {
+    .heroTitle {
+        font-size: var(--font-size-4xl);
+    }
+
+    .heroSubtitle {
+        font-size: var(--font-size-lg);
+    }
+
+    .infoGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .featuresGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .industriesGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .sectionHeader h2 {
+        font-size: var(--font-size-3xl);
+    }
+
+    .productImage {
+        height: 180px;
+    }
+}
