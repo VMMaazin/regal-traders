@@ -10,7 +10,7 @@ const inter = Inter({
 })
 
 export const metadata = {
-    metadataBase: new URL('https://regaltraders.com'),
+    metadataBase: new URL('https://regal-traders.vercel.app'),
     title: {
         default: 'Regal Traders - Wholesale Plastic Crates & Industrial Supplies | Bengaluru, India',
         template: '%s | Regal Traders'
@@ -28,7 +28,7 @@ export const metadata = {
     openGraph: {
         type: 'website',
         locale: 'en_IN',
-        url: 'https://regaltraders.com',
+        url: 'https://regal-traders.vercel.app',
         siteName: 'Regal Traders',
         title: 'Regal Traders - Wholesale Plastic Crates & Industrial Supplies',
         description: 'Leading wholesale supplier of plastic crates, storage bins, garbage bins, and poultry equipment in India.',
@@ -64,17 +64,13 @@ export const metadata = {
         apple: '/logo.png',
     },
     verification: {
-        // Add Google Search Console verification here
-        // google: 'your-verification-code',
+        google: 'wIoM1Xb9dDReY-wWB6fY95TQJxg2b-6ZEfxztiSWs4o',
     },
 }
 
 export default function RootLayout({ children }) {
     return (
         <html lang="en">
-            <head>
-                <link rel="canonical" href="https://regaltraders.com" />
-            </head>
             <body className={inter.className}>
                 <Header />
                 <main>{children}</main>
