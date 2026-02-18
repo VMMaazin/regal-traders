@@ -4,6 +4,6 @@ export default function robots() {
             userAgent: '*',
             allow: '/',
         },
-        sitemap: 'https://regaltraders.com/sitemap.xml',
+        sitemap: 'https://regal-traders.vercel.app/sitemap.xml',
     }
 }
