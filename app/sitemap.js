@@ -1,5 +1,5 @@
 export default function sitemap() {
-    const baseUrl = 'https://regaltraders.com'
+    const baseUrl = 'https://regal-traders.vercel.app'
 
     return [
         {
