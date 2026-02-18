@@ -187,7 +187,7 @@ export default function Home() {
                         '@context': 'https://schema.org',
                         '@type': 'WebSite',
                         name: 'Regal Traders',
-                        url: 'https://regaltraders.com',
+                        url: 'https://regal-traders.vercel.app',
                     }),
                 }}
             />

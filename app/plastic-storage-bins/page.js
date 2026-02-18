@@ -339,7 +339,7 @@ export default function PlasticStorageBinsPage() {
                         name: 'Plastic Storage Bins',
                         description: 'Front open plastic storage bins for racking and warehouse organization',
                         category: 'Industrial Supplies',
-                        image: 'https://regaltraders.com/products/storage-bins.jpg',
+                        image: 'https://regal-traders.vercel.app/products/storage-bins.jpg',
                     })),
                 }}
             />

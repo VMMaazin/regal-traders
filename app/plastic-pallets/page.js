@@ -237,7 +237,7 @@ export default function PlasticPalletsPage() {
                         name: 'Heavy Duty Plastic Pallets',
                         description: 'High-quality plastic pallets for industrial storage and logistics in India',
                         category: 'Industrial Supplies',
-                        image: 'https://regaltraders.com/plastic-pallets.png',
+                        image: 'https://regal-traders.vercel.app/plastic-pallets.png',
                     })),
                 }}
             />

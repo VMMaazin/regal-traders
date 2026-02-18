@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-    siteUrl: process.env.SITE_URL || 'https://regaltraders.com',
+    siteUrl: process.env.SITE_URL || 'https://regal-traders.vercel.app',
     generateRobotsTxt: true,
     robotsTxtOptions: {
         policies: [

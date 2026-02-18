@@ -238,7 +238,7 @@ const message = 'Hello! I would like to inquire about your products.'; // Defaul
 // Line 31-36
 <div className={styles.contact}>
     <MailIcon size={16} />
-    <p>info@regaltraders.com</p>
+    <p>info@regal-traders.vercel.app</p>
 </div>
 ```
 

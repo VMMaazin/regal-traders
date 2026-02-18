@@ -153,8 +153,8 @@ export default function Footer() {
                         '@context': 'https://schema.org',
                         '@type': 'Organization',
                         name: 'Regal Traders',
-                        url: 'https://regaltraders.com',
-                        logo: 'https://regaltraders.com/logo.png',
+                        url: 'https://regal-traders.vercel.app',
+                        logo: 'https://regal-traders.vercel.app/logo.png',
                         contactPoint: {
                             '@type': 'ContactPoint',
                             telephone: '+91-9480971860',

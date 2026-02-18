@@ -275,7 +275,7 @@ export default function PlasticGarbageBinsPage() {
                         name: 'Industrial Plastic Garbage Bins',
                         description: 'Heavy-duty plastic garbage bins for waste management',
                         category: 'Industrial Supplies',
-                        image: 'https://regaltraders.com/products/garbage-bins.jpg',
+                        image: 'https://regal-traders.vercel.app/products/garbage-bins.jpg',
                     })),
                 }}
             />

@@ -280,7 +280,7 @@ export default function PoultryEquipmentPage() {
                         name: 'Poultry Feeders and Drinkers',
                         description: 'High-quality plastic feeders and drinkers for poultry farms',
                         category: 'Agricultural Supplies',
-                        image: 'https://regaltraders.com/products/poultry-equipment.jpg',
+                        image: 'https://regal-traders.vercel.app/products/poultry-equipment.jpg',
                     })),
                 }}
             />
