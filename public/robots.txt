@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: https://regal-traders.vercel.app
-
-# Sitemaps
-Sitemap: https://regal-traders.vercel.app/sitemap.xml

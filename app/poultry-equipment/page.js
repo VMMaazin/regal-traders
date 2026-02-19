@@ -7,6 +7,10 @@ import Section from '../components/ui/Section'
 import SectionDivider from '../components/ui/SectionDivider'
 import { SparklesIcon, ShieldIcon, TargetIcon, ScaleIcon, CloudIcon, DollarIcon } from '../components/ui/Icons'
 import styles from '../plastic-crates/product.module.css'
+import { client, urlFor } from '@/lib/sanity'
+
+
+export const dynamic = 'force-dynamic'
 
 export const metadata = generatePageMetadata({
     title: 'Poultry Feeders & Drinkers Bangalore | Poultry Equipment | Regal Traders',
@@ -15,7 +19,29 @@ export const metadata = generatePageMetadata({
     canonical: '/poultry-equipment',
 })
 
-export default function PoultryEquipmentPage() {
+export default async function PoultryEquipmentPage() {
+
+    const sanityProducts = await client.fetch(`
+      *[_type == "product" && category == "poultry-equipment"]{
+        _id,
+        name,
+        description,
+        dimensions,
+        image
+      }
+    `, {}, { next: { revalidate: 0 } })
+
+    const staticProducts = [
+        { name: '8KG Feeder', dimensions: '35cm x 35cm x 45cm', image: '/8kg_feeder.png', description: 'Heavy-duty feeder with 8KG capacity. Perfect for adult birds and large flocks.' },
+        { name: 'Chick Feeder - 2KG', dimensions: '2KG Capacity', image: '/chick_feeder_2kg_f.png', description: 'Feeder designed specifically for chicks with 2KG capacity. Ideal for young birds.' },
+        { name: 'Manual Drinker - 2L', dimensions: '2 Litres', image: '/manual_drinker_2ltr_f.png', description: 'Manual water drinker for poultry. Easy to fill and clean.' },
+        { name: 'Manual Drinker - 4L', dimensions: '4 Litres', image: '/manual_drinker_4ltr_f.png', description: 'Mid-size manual water drinker. Perfect for medium flocks.' },
+        { name: 'Manual Drinker - 8L', dimensions: '8 Litres', image: '/manual_drinker_8ltr_f.png', description: 'Large capacity manual water drinker for commercial farms.' },
+        { name: 'Nova Drinker Automatic', dimensions: 'Automatic System', image: '/nova_drinker_automatic_f.png', description: 'Automatic water drinker for poultry. Provides continuous water supply with minimal wastage.' },
+        { name: 'Turbo Feeder', dimensions: 'High-Efficiency', image: '/turbo_feeder_f.png', description: 'High-efficiency poultry feeder. Reduces feed wastage and improves feeding efficiency.' },
+        { name: 'Lifting Cage', dimensions: 'Transport Cage', image: '/lifting_cage.png', description: 'Cage for lifting and transporting birds safely. Durable construction for farm use.' },
+    ]
+
     const features = [
         { title: 'Hygienic Design', description: 'Easy to clean and maintain for bird health', IconComponent: SparklesIcon },
         { title: 'Durable Material', description: 'Long-lasting plastic construction', IconComponent: ShieldIcon },
@@ -112,11 +138,6 @@ export default function PoultryEquipmentPage() {
         },
     ]
 
-    const relatedProducts = [
-        { name: 'Plastic Crates', href: '/plastic-crates' },
-        { name: 'Plastic Storage Bins', href: '/plastic-storage-bins' },
-    ]
-
     return (
         <>
             <Section bgImage="/poultry-equipment-hero.jpg" overlay="rgba(0,0,0,0.6)" size="lg" className={styles.hero}>
@@ -143,25 +164,37 @@ export default function PoultryEquipmentPage() {
                         <p>Complete feeding and watering solutions for poultry farms in India</p>
                     </div>
                     <div className="grid grid-cols-3">
-                        {[
-                            { name: '8KG Feeder', dimensions: '35cm x 35cm x 45cm', image: '/8kg_feeder.png', description: 'Heavy-duty feeder with 8KG capacity. Perfect for adult birds and large flocks.' },
-                            { name: 'Chick Feeder - 2KG', dimensions: '2KG Capacity', image: '/chick_feeder_2kg_f.png', description: 'Feeder designed specifically for chicks with 2KG capacity. Ideal for young birds.' },
-                            { name: 'Manual Drinker - 2L', dimensions: '2 Litres', image: '/manual_drinker_2ltr_f.png', description: 'Manual water drinker for poultry. Easy to fill and clean.' },
-                            { name: 'Manual Drinker - 4L', dimensions: '4 Litres', image: '/manual_drinker_4ltr_f.png', description: 'Mid-size manual water drinker. Perfect for medium flocks.' },
-                            { name: 'Manual Drinker - 8L', dimensions: '8 Litres', image: '/manual_drinker_8ltr_f.png', description: 'Large capacity manual water drinker for commercial farms.' },
-                            { name: 'Nova Drinker Automatic', dimensions: 'Automatic System', image: '/nova_drinker_automatic_f.png', description: 'Automatic water drinker for poultry. Provides continuous water supply with minimal wastage.' },
-                            { name: 'Turbo Feeder', dimensions: 'High-Efficiency', image: '/turbo_feeder_f.png', description: 'High-efficiency poultry feeder. Reduces feed wastage and improves feeding efficiency.' },
-                            { name: 'Lifting Cage', dimensions: 'Transport Cage', image: '/lifting_cage.png', description: 'Cage for lifting and transporting birds safely. Durable construction for farm use.' },
-                        ].map((product) => (
+
+                        {/* Static Products — hidden if Sanity has an entry with the same name */}
+                        {staticProducts
+                            .filter(staticProduct =>
+                                !sanityProducts.some(sanityProduct =>
+                                    sanityProduct.name === staticProduct.name
+                                )
+                            )
+                            .map((product) => (
+                                <ProductCard
+                                    key={product.name}
+                                    name={product.name}
+                                    dimensions={product.dimensions}
+                                    description={product.description}
+                                    image={product.image}
+                                    iconType="feather"
+                                />
+                            ))}
+
+                        {/* Sanity Products */}
+                        {sanityProducts.map((product) => (
                             <ProductCard
-                                key={product.name}
+                                key={product._id}
                                 name={product.name}
                                 dimensions={product.dimensions}
                                 description={product.description}
-                                image={product.image}
+                                image={product.image ? urlFor(product.image).width(500).url() : '/poultry-equipment-hero.jpg'}
                                 iconType="feather"
                             />
                         ))}
+
                     </div>
                 </Container>
             </Section>

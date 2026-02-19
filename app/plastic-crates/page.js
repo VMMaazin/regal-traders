@@ -5,6 +5,10 @@ import ProductCard from '../components/ui/ProductCard'
 import Button from '../components/ui/Button'
 import SectionDivider from '../components/ui/SectionDivider'
 import styles from './product.module.css'
+import { client, urlFor } from '@/lib/sanity'
+
+
+export const dynamic = 'force-dynamic'
 
 export const metadata = {
     title: 'Plastic Crates in Bangalore | Plastic Crates | Regal Traders',
@@ -12,9 +16,35 @@ export const metadata = {
     keywords: ['plastic crates Bangalore', 'plastic crate manufacturers in Bangalore', 'industrial crates India', 'vegetable crates wholesale', 'heavy duty plastic crates', 'milk crates India', 'fruit crates Bangalore'],
 }
 
-export default function PlasticCratesPage() {
+export default async function PlasticCratesPage() {
+
+    console.log('--- Fetching Plastic Crates ---')
+    const sanityProducts = await client.fetch(`
+      *[_type == "product" && category == "plastic-crates"]{
+        _id,
+        name,
+        description,
+        dimensions,
+        image
+      }
+    `, {}, { cache: 'no-store', next: { revalidate: 0 } })
+    console.log('--- Fetched:', sanityProducts.length, 'products:', sanityProducts.map(p => p.name))
+
+    const staticProducts = [
+        { id: '32150-cc-crate', name: '32150 CC Crate', dimensions: '300 x 200 x 150 mm', image: '/300_x_200_x_150.png', description: 'Complete Closed Crate with Built-in Handle', alt: 'Plastic Crates in Bangalore - Stackable Storage Solutions by Regal Traders' },
+        { id: '43220-cc-crate', name: '43220 CC Crate', dimensions: '400 x 300 x 220 mm', image: '/400_x_300_x_220.png', description: 'Complete Closed Crate with Built-in Handle', alt: 'Industrial Plastic Crates Bangalore - Heavy Duty Crates for Manufacturing Hubs' },
+        { id: '64120-tp-crate', name: '64120 TP Crate', dimensions: '600 x 400 x 120 mm', image: '/600_x_400_x_120.png', description: 'Totally Perforated Crate', alt: 'Vegetable Plastic Crates Bangalore - Perforated Crates for Fresh Produce in India' },
+        { id: '64180-tp-crate', name: '64180 TP Crate', dimensions: '600 x 400 x 180 mm', image: '/600_x_400_x_180.png', description: 'Totally Perforated Crate', alt: 'Wholesale Plastic Crates Bangalore - Bulk Storage Bins' },
+        { id: '64225-tp-crate', name: '64225 TP Crate', dimensions: '600 x 400 x 225 mm', image: '/600_x_400_x_180.png', description: 'Totally Perforated Crate', alt: 'Stackable plastic crates Bangalore' },
+        { id: '64325-ch-crate', name: '64325 CH Crate', dimensions: '600 x 400 x 325 mm', image: '/600_x_400_x_325.png', description: 'Complete Closed Crate with Handle', alt: 'Industrial plastic crates Bangalore' },
+        { id: '64380-ch-crate', name: '64380 CH Crate', dimensions: '600 x 400 x 380 mm', image: '/600_x_400_x_380.png', description: 'Complete Closed Crate with Handle', alt: 'Vegetable plastic crates Bangalore' },
+        { id: '857425-ch-crate', name: '857425 CH Crate', dimensions: '805 x 570 x 425 mm', image: '/805_x_570_x_425.png', description: 'Complete Closed Crate with Handle', alt: 'Wholesale plastic crates India' },
+        { id: '543629-tp-crate', name: '543629 TP Crate', dimensions: '540 x 360 x 290 mm', image: '/540_x_360_x_290.png', description: 'Perforated Crate', alt: 'Plastic crate manufacturers in Bangalore' },
+    ]
+
     return (
         <>
+            {/* Hero */}
             <Section bgImage="/plastic-crates-hero.jpg" overlay="rgba(0,0,0,0.6)" size="lg" className={styles.hero}>
                 <Container>
                     <div className={styles.heroContent}>
@@ -92,7 +122,6 @@ export default function PlasticCratesPage() {
                                 Lightweight yet durable for heavy loads like tomatoes and onions.
                             </p>
                         </Card>
-
                         <Card className={styles.infoCard}>
                             <h3>Industrial & Heavy Duty Crates</h3>
                             <p>
@@ -101,7 +130,6 @@ export default function PlasticCratesPage() {
                                 for diverse industrial applications.
                             </p>
                         </Card>
-
                         <Card className={styles.infoCard}>
                             <h3>Milk, Bread & Egg Crates</h3>
                             <p>
@@ -112,17 +140,9 @@ export default function PlasticCratesPage() {
                     </div>
 
                     <div className="grid grid-cols-3">
-                        {[
-                            { id: '32150-cc-crate', name: '32150 CC Crate', dimensions: '300 x 200 x 150 mm', image: '/300_x_200_x_150.png', description: 'Complete Closed Crate with Built-in Handle', alt: 'Plastic Crates in Bangalore - Stackable Storage Solutions by Regal Traders' },
-                            { id: '43220-cc-crate', name: '43220 CC Crate', dimensions: '400 x 300 x 220 mm', image: '/400_x_300_x_220.png', description: 'Complete Closed Crate with Built-in Handle', alt: 'Industrial Plastic Crates Bangalore - Heavy Duty Crates for Manufacturing Hubs' },
-                            { id: '64120-tp-crate', name: '64120 TP Crate', dimensions: '600 x 400 x 120 mm', image: '/600_x_400_x_120.png', description: 'Totally Perforated Crate', alt: 'Vegetable Plastic Crates Bangalore - Perforated Crates for Fresh Produce in India' },
-                            { id: '64180-tp-crate', name: '64180 TP Crate', dimensions: '600 x 400 x 180 mm', image: '/600_x_400_x_180.png', description: 'Totally Perforated Crate', alt: 'Wholesale Plastic Crates Bangalore - Bulk Storage Bins' },
-                            { id: '64225-tp-crate', name: '64225 TP Crate', dimensions: '600 x 400 x 225 mm', image: '/600_x_400_x_180.png', description: 'Totally Perforated Crate', alt: 'Stackable plastic crates Bangalore' },
-                            { id: '64325-ch-crate', name: '64325 CH Crate', dimensions: '600 x 400 x 325 mm', image: '/600_x_400_x_325.png', description: 'Complete Closed Crate with Handle', alt: 'Industrial plastic crates Bangalore' },
-                            { id: '64380-ch-crate', name: '64380 CH Crate', dimensions: '600 x 400 x 380 mm', image: '/600_x_400_x_380.png', description: 'Complete Closed Crate with Handle', alt: 'Vegetable plastic crates Bangalore' },
-                            { id: '857425-ch-crate', name: '857425 CH Crate', dimensions: '805 x 570 x 425 mm', image: '/805_x_570 x_425.png', description: 'Complete Closed Crate with Handle', alt: 'Wholesale plastic crates India' },
-                            { id: '543629-tp-crate', name: '543629 TP Crate', dimensions: '540 x 360 x 290 mm', image: '/540_x_360_x_290.png', description: 'Perforated Crate', alt: 'Plastic crate manufacturers in Bangalore' },
-                        ].map((product) => (
+
+                        {/* Static Products */}
+                        {staticProducts.map((product) => (
                             <ProductCard
                                 key={product.id}
                                 name={product.name}
@@ -132,6 +152,19 @@ export default function PlasticCratesPage() {
                                 alt={product.alt}
                             />
                         ))}
+
+                        {/* Sanity Products */}
+                        {sanityProducts.map((product) => (
+                            <ProductCard
+                                key={product._id}
+                                name={product.name}
+                                dimensions={product.dimensions}
+                                description={product.description}
+                                image={product.image ? urlFor(product.image).width(500).url() : '/plastic-crates-hero.jpg'}
+                                alt={product.name}
+                            />
+                        ))}
+
                     </div>
                 </Container>
             </Section>
@@ -154,27 +187,22 @@ export default function PlasticCratesPage() {
                             <h3>E-commerce & Logistics</h3>
                             <p>Efficient inventory management and last-mile delivery solutions for fast-paced logistics centers in major metros.</p>
                         </Card>
-
                         <Card className={styles.industryCard}>
                             <h3>Agriculture & Horticulture</h3>
                             <p>Reliable transport and harvesting crates for fresh produce traders and agricultural hubs across India.</p>
                         </Card>
-
                         <Card className={styles.industryCard}>
                             <h3>Manufacturing & Engineering</h3>
                             <p>Supplying the <strong>Industrial plastic crates Bangalore</strong> needs for heavy machinery units and parts storage.</p>
                         </Card>
-
                         <Card className={styles.industryCard}>
                             <h3>Retail & Supermarkets</h3>
                             <p>Organized storage and display solutions for grocery chains and supermarkets nationwide.</p>
                         </Card>
-
                         <Card className={styles.industryCard}>
                             <h3>Pharma & Healthcare</h3>
                             <p>Hygienic and organized storage for medical supplies in pharmaceutical and healthcare logistics across the country.</p>
                         </Card>
-
                         <Card className={styles.industryCard}>
                             <h3>Dairy & Food Processing</h3>
                             <p>Food-grade containers for daily milk distribution and food production units from Bangalore to the whole of India.</p>
@@ -236,14 +264,12 @@ export default function PlasticCratesPage() {
                                 for direct contact with food products and dairy.
                             </p>
                         </Card>
-
                         <Card className={styles.faqItem}>
                             <h3>Do you ship plastic crates outside of Bangalore?</h3>
                             <p>
                                 Absolutely. While we have a strong presence in Bangalore, we provide reliable pan-India shipping to all major cities and industrial zones.
                             </p>
                         </Card>
-
                         <Card className={styles.faqItem}>
                             <h3>Do you offer discounts for wholesale orders?</h3>
                             <p>
@@ -251,14 +277,12 @@ export default function PlasticCratesPage() {
                                 discounts for warehouses and industrial units across the country.
                             </p>
                         </Card>
-
                         <Card className={styles.faqItem}>
                             <h3>What is the Minimum Order Quantity (MOQ)?</h3>
                             <p>
                                 The MOQ varies depending on the specific product and size. Please contact our sales team for precise details regarding your requirements.
                             </p>
                         </Card>
-
                         <Card className={styles.faqItem}>
                             <h3>Can I get my company logo printed on the crates?</h3>
                             <p>

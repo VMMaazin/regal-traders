@@ -7,6 +7,10 @@ import Button from '../components/ui/Button'
 import SectionDivider from '../components/ui/SectionDivider'
 import { ShieldIcon, BoxIcon, TruckIcon, TargetIcon, StackIcon, CloudIcon } from '../components/ui/Icons'
 import styles from '../plastic-crates/product.module.css'
+import { client, urlFor } from '@/lib/sanity'
+
+
+export const dynamic = 'force-dynamic'
 
 export const metadata = generatePageMetadata({
     title: 'Plastic Pallets in Bangalore | Plastic Pallets | Regal Traders',
@@ -15,8 +19,19 @@ export const metadata = generatePageMetadata({
     canonical: '/plastic-pallets',
 })
 
-export default function PlasticPalletsPage() {
-    const products = [
+export default async function PlasticPalletsPage() {
+
+    const sanityProducts = await client.fetch(`
+      *[_type == "product" && category == "plastic-pallets"]{
+        _id,
+        name,
+        description,
+        dimensions,
+        image
+      }
+    `, {}, { next: { revalidate: 0 } })
+
+    const staticProducts = [
         {
             id: '121013-lw-cft',
             name: '121013 LW CFT',
@@ -44,13 +59,13 @@ export default function PlasticPalletsPage() {
             dimensions: '1200 x 1000 x 150 mm',
             description: '3 Runner Pallet which can bear up to 2500 kg of static load and up to 800 kg of dynamic load.',
             image: '/121015_LW.png'
-        }
+        },
     ]
 
     const features = [
         { title: 'High Load Capacity', description: 'Engineered to handle static loads up to 4500kg and dynamic loads up to 1000kg.', IconComponent: ShieldIcon },
         { title: 'Durable Construction', description: 'Manufactured from high-grade HDPE for long-lasting industrial performance.', IconComponent: BoxIcon },
-        { title: 'Efficient Handling', description: 'Optimized designs for pallet jacks and forklifts, reducing logstics time.', IconComponent: TruckIcon },
+        { title: 'Efficient Handling', description: 'Optimized designs for pallet jacks and forklifts, reducing logistics time.', IconComponent: TruckIcon },
         { title: 'Standard Dimensions', description: 'Available in 1200x1000mm sizes, compatible with global logistics standards.', IconComponent: TargetIcon },
         { title: 'Stackable Design', description: 'Space-saving stackability for empty pallet storage and return logistics.', IconComponent: StackIcon },
         { title: 'Weather Resistant', description: 'Resistant to moisture, chemicals, and extreme temperatures across India.', IconComponent: CloudIcon },
@@ -131,16 +146,37 @@ export default function PlasticPalletsPage() {
                     </div>
 
                     <div className="grid grid-cols-2">
-                        {products.map((product) => (
+
+                        {/* Static Products — hidden if Sanity has an entry with the same name */}
+                        {staticProducts
+                            .filter(staticProduct =>
+                                !sanityProducts.some(sanityProduct =>
+                                    sanityProduct.name === staticProduct.name
+                                )
+                            )
+                            .map((product) => (
+                                <ProductCard
+                                    key={product.id}
+                                    name={product.name}
+                                    dimensions={product.dimensions}
+                                    description={product.description}
+                                    image={product.image}
+                                    iconType="container"
+                                />
+                            ))}
+
+                        {/* Sanity Products */}
+                        {sanityProducts.map((product) => (
                             <ProductCard
-                                key={product.id}
+                                key={product._id}
                                 name={product.name}
                                 dimensions={product.dimensions}
                                 description={product.description}
-                                image={product.image}
+                                image={product.image ? urlFor(product.image).width(500).url() : '/plastic-pallets.png'}
                                 iconType="container"
                             />
                         ))}
+
                     </div>
                 </Container>
             </Section>

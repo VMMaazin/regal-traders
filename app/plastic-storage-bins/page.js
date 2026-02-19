@@ -7,6 +7,10 @@ import Section from '../components/ui/Section'
 import SectionDivider from '../components/ui/SectionDivider'
 import { ShieldIcon, StackIcon, SparklesIcon, ScaleIcon, CloudIcon, PaletteIcon } from '../components/ui/Icons'
 import styles from '../plastic-crates/product.module.css'
+import { client, urlFor } from '@/lib/sanity'
+
+
+export const dynamic = 'force-dynamic'
 
 export const metadata = generatePageMetadata({
     title: 'Plastic Storage Bins in Bangalore | Storage Bins | Regal Traders',
@@ -15,57 +19,26 @@ export const metadata = generatePageMetadata({
     canonical: '/plastic-storage-bins',
 })
 
-export default function PlasticStorageBinsPage() {
-    const products = [
-        {
-            id: 'crate-5',
-            name: 'Crate 5',
-            dimensions: '16.5cm x 11.4cm x 7.8cm',
-            description: 'Front partially open storage and racking bin. Ideal for small parts and components.',
-            image: '/crate_5_f.png'
-        },
-        {
-            id: 'crate-15',
-            name: 'Crate 15',
-            dimensions: '17cm x 12cm x 8.5cm',
-            description: 'Front partially open storage and racking bin. Perfect for hardware and tools.',
-            image: '/crate_15_f.png'
-        },
-        {
-            id: 'crate-25',
-            name: 'Crate 25',
-            dimensions: '22.5cm x 15cm x 12.5cm',
-            description: 'Front partially open storage and racking bin. Great for automotive parts.',
-            image: '/crate_25_f.png'
-        },
-        {
-            id: 'crate-35',
-            name: 'Crate 35',
-            dimensions: '29.5cm x 21cm x 16cm',
-            description: 'Front partially open storage and racking bin. Suitable for electronics and inventory.',
-            image: '/crate_35_f.png'
-        },
-        {
-            id: 'crate-60',
-            name: 'Crate 60',
-            dimensions: '25cm x 18cm x 13cm',
-            description: 'Front partially open storage and racking bin. Perfect for warehouse organization.',
-            image: '/crate_60f.png'
-        },
-        {
-            id: 'crate-80',
-            name: 'Crate 80',
-            dimensions: '35.5cm x 22.5cm x 17cm',
-            description: 'Front partially open storage and racking bin. Ideal for larger parts and materials.',
-            image: '/crate_80_f.png'
-        },
-        {
-            id: 'crate-100',
-            name: 'Crate 100',
-            dimensions: '35.5cm x 32cm x 17cm',
-            description: 'Front partially open storage and racking bin. Maximum capacity for bulk storage.',
-            image: '/crate_100_f.png'
-        },
+export default async function PlasticStorageBinsPage() {
+
+    const sanityProducts = await client.fetch(`
+      *[_type == "product" && category == "plastic-storage-bins"]{
+        _id,
+        name,
+        description,
+        dimensions,
+        image
+      }
+    `, {}, { next: { revalidate: 0 } })
+
+    const staticProducts = [
+        { name: 'Crate 5', dimensions: '16.5cm x 11.4cm x 7.8cm', image: '/crate_5_f.png', description: 'Front partially open storage and racking bin. Ideal for small parts and components.' },
+        { name: 'Crate 15', dimensions: '17cm x 12cm x 8.5cm', image: '/crate_15_f.png', description: 'Front partially open storage and racking bin. Perfect for hardware and tools.' },
+        { name: 'Crate 25', dimensions: '22.5cm x 15cm x 12.5cm', image: '/crate_25_f.png', description: 'Front partially open storage and racking bin. Great for automotive parts.' },
+        { name: 'Crate 35', dimensions: '29.5cm x 21cm x 16cm', image: '/crate_35_f.png', description: 'Front partially open storage and racking bin. Suitable for electronics and inventory.' },
+        { name: 'Crate 60', dimensions: '25cm x 18cm x 13cm', image: '/crate_60f.png', description: 'Front partially open storage and racking bin. Perfect for warehouse organization.' },
+        { name: 'Crate 80', dimensions: '35.5cm x 22.5cm x 17cm', image: '/crate_80_f.png', description: 'Front partially open storage and racking bin. Ideal for larger parts and materials.' },
+        { name: 'Crate 100', dimensions: '35.5cm x 32cm x 17cm', image: '/crate_100_f.png', description: 'Front partially open storage and racking bin. Maximum capacity for bulk storage.' },
     ]
 
     const features = [
@@ -173,11 +146,6 @@ export default function PlasticStorageBinsPage() {
         },
     ]
 
-    const relatedProducts = [
-        { name: 'Plastic Crates', href: '/plastic-crates' },
-        { name: 'Garbage Bins', href: '/plastic-garbage-bins' },
-    ]
-
     return (
         <>
             <Section bgImage="/storage-bins-hero.jpg" overlay="rgba(0,0,0,0.6)" size="lg" className={styles.hero}>
@@ -204,24 +172,37 @@ export default function PlasticStorageBinsPage() {
                         <p>Front partially open storage and racking bins for all applications</p>
                     </div>
                     <div className="grid grid-cols-3">
-                        {[
-                            { name: 'Crate 5', dimensions: '16.5cm x 11.4cm x 7.8cm', image: '/crate_5_f.png', description: 'Front partially open storage and racking bin. Ideal for small parts and components.' },
-                            { name: 'Crate 15', dimensions: '17cm x 12cm x 8.5cm', image: '/crate_15_f.png', description: 'Front partially open storage and racking bin. Perfect for hardware and tools.' },
-                            { name: 'Crate 25', dimensions: '22.5cm x 15cm x 12.5cm', image: '/crate_25_f.png', description: 'Front partially open storage and racking bin. Great for automotive parts.' },
-                            { name: 'Crate 35', dimensions: '29.5cm x 21cm x 16cm', image: '/crate_35_f.png', description: 'Front partially open storage and racking bin. Suitable for electronics and inventory.' },
-                            { name: 'Crate 60', dimensions: '25cm x 18cm x 13cm', image: '/crate_60f.png', description: 'Front partially open storage and racking bin. Perfect for warehouse organization.' },
-                            { name: 'Crate 80', dimensions: '35.5cm x 22.5cm x 17cm', image: '/crate_80_f.png', description: 'Front partially open storage and racking bin. Ideal for larger parts and materials.' },
-                            { name: 'Crate 100', dimensions: '35.5cm x 32cm x 17cm', image: '/crate_100_f.png', description: 'Front partially open storage and racking bin. Maximum capacity for bulk storage.' },
-                        ].map((product) => (
+
+                        {/* Static Products — hidden if Sanity has an entry with the same name */}
+                        {staticProducts
+                            .filter(staticProduct =>
+                                !sanityProducts.some(sanityProduct =>
+                                    sanityProduct.name === staticProduct.name
+                                )
+                            )
+                            .map((product) => (
+                                <ProductCard
+                                    key={product.name}
+                                    name={product.name}
+                                    dimensions={product.dimensions}
+                                    description={product.description}
+                                    image={product.image}
+                                    iconType="container"
+                                />
+                            ))}
+
+                        {/* Sanity Products */}
+                        {sanityProducts.map((product) => (
                             <ProductCard
-                                key={product.name}
+                                key={product._id}
                                 name={product.name}
                                 dimensions={product.dimensions}
                                 description={product.description}
-                                image={product.image}
+                                image={product.image ? urlFor(product.image).width(500).url() : '/storage-bins-hero.jpg'}
                                 iconType="container"
                             />
                         ))}
+
                     </div>
                 </Container>
             </Section>

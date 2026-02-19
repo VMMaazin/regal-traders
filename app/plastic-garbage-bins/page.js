@@ -7,6 +7,10 @@ import Section from '../components/ui/Section'
 import SectionDivider from '../components/ui/SectionDivider'
 import { ShieldIcon, BoxIcon, TruckIcon, TargetIcon, CloudIcon, SparklesIcon } from '../components/ui/Icons'
 import styles from '../plastic-crates/product.module.css'
+import { client, urlFor } from '@/lib/sanity'
+
+
+export const dynamic = 'force-dynamic'
 
 export const metadata = generatePageMetadata({
     title: 'Plastic Garbage Bins in Bangalore | Garbage Bins | Regal Traders',
@@ -15,7 +19,18 @@ export const metadata = generatePageMetadata({
     canonical: '/plastic-garbage-bins',
 })
 
-export default function PlasticGarbageBinsPage() {
+export default async function PlasticGarbageBinsPage() {
+
+    const sanityProducts = await client.fetch(`
+      *[_type == "product" && category == "plastic-garbage-bins"]{
+        _id,
+        name,
+        description,
+        dimensions,
+        image
+      }
+    `, {}, { next: { revalidate: 0 } })
+
     const features = [
         { title: 'Heavy-Duty', description: 'Built to withstand heavy loads and daily use', IconComponent: ShieldIcon },
         { title: 'Large Capacity', description: 'Available in various sizes up to 240L', IconComponent: BoxIcon },
@@ -112,9 +127,15 @@ export default function PlasticGarbageBinsPage() {
         },
     ]
 
-    const relatedProducts = [
-        { name: 'Plastic Crates', href: '/plastic-crates' },
-        { name: 'Plastic Storage Bins', href: '/plastic-storage-bins' },
+    const staticProducts = [
+        { name: '2 Wheeled Bin - 120L', dimensions: '120 Litres', image: '/2_wheeled_bin_120_lts.png', description: 'Durable wheeled bin for efficient waste handling. Perfect for residential and commercial use.' },
+        { name: '2 Wheeled Bin with Pedal - 120L', dimensions: '120 Litres', image: '/2_wheeled_bin_with_pedal.png', description: 'Hands-free pedal operation with wheels. Hygienic waste disposal for commercial spaces.' },
+        { name: '2 Wheeled Bin - 240L', dimensions: '240 Litres', image: '/2_wheeled_bin_240_litres.png', description: 'Large capacity wheeled bin for heavy-duty waste collection in industrial and commercial areas.' },
+        { name: '2 in 1 Bin with Pedal - 30L', dimensions: '30 Litres', image: '/2_in_1_pedal_bin_30_litres.png', description: 'Dual-compartment pedal bin for wet and dry waste segregation. Ideal for homes and offices.' },
+        { name: 'Bio-Hazard Bin with Pedal', dimensions: 'Medical Grade', image: '/bio-hazard_bin_with_pedal_1.png', description: 'Safe disposal bin for medical and hazardous waste. Color-coded for easy identification.' },
+        { name: 'Swing Bin - 60L', dimensions: '60 Litres', image: '/swing_bin_60_lts_f.png', description: 'Heavy-duty swing lid bin for indoor and outdoor waste disposal.' },
+        { name: 'Swing Bin - 80L', dimensions: '80 Litres', image: '/swing_bin_80_lts_f.png', description: 'Large capacity swing bin for commercial and public spaces.' },
+        { name: 'Doom Lid Bin - 110L', dimensions: '110 Litres', image: '/doom_lid_110_lts_f.png', description: 'Durable doom lid bin for hygienic waste disposal in commercial environments.' },
     ]
 
     return (
@@ -143,25 +164,37 @@ export default function PlasticGarbageBinsPage() {
                         <p>Professional waste management solutions for all applications</p>
                     </div>
                     <div className="grid grid-cols-3">
-                        {[
-                            { name: '2 Wheeled Bin - 120L', dimensions: '120 Litres', image: '/2_wheeled_bin_120_lts.png', description: 'Durable wheeled bin for efficient waste handling. Perfect for residential and commercial use.' },
-                            { name: '2 Wheeled Bin with Pedal - 120L', dimensions: '120 Litres', image: '/2_wheeled_bin_with_pedal.png', description: 'Hands-free pedal operation with wheels. Hygienic waste disposal for commercial spaces.' },
-                            { name: '2 Wheeled Bin - 240L', dimensions: '240 Litres', image: '/2_wheeled_bin_240_litres.png', description: 'Large capacity wheeled bin for heavy-duty waste collection in industrial and commercial areas.' },
-                            { name: '2 in 1 Bin with Pedal - 30L', dimensions: '30 Litres', image: '/2_in_1_pedal_bin_30_litres.png', description: 'Dual-compartment pedal bin for wet and dry waste segregation. Ideal for homes and offices.' },
-                            { name: 'Bio-Hazard Bin with Pedal', dimensions: 'Medical Grade', image: '/bio-hazard_bin_with_pedal_1.png', description: 'Safe disposal bin for medical and hazardous waste. Color-coded for easy identification.' },
-                            { name: 'Swing Bin - 60L', dimensions: '60 Litres', image: '/swing_bin_60_lts_f.png', description: 'Heavy-duty swing lid bin for indoor and outdoor waste disposal.' },
-                            { name: 'Swing Bin - 80L', dimensions: '80 Litres', image: '/swing_bin_80_lts_f.png', description: 'Large capacity swing bin for commercial and public spaces.' },
-                            { name: 'Doom Lid Bin - 110L', dimensions: '110 Litres', image: '/doom_lid_110_lts_f.png', description: 'Durable doom lid bin for hygienic waste disposal in commercial environments.' },
-                        ].map((product) => (
+
+                        {/* Static Products — hidden if Sanity has an entry with the same name */}
+                        {staticProducts
+                            .filter(staticProduct =>
+                                !sanityProducts.some(sanityProduct =>
+                                    sanityProduct.name === staticProduct.name
+                                )
+                            )
+                            .map((product) => (
+                                <ProductCard
+                                    key={product.name}
+                                    name={product.name}
+                                    dimensions={product.dimensions}
+                                    description={product.description}
+                                    image={product.image}
+                                    iconType="trash"
+                                />
+                            ))}
+
+                        {/* Sanity Products */}
+                        {sanityProducts.map((product) => (
                             <ProductCard
-                                key={product.name}
+                                key={product._id}
                                 name={product.name}
                                 dimensions={product.dimensions}
                                 description={product.description}
-                                image={product.image}
+                                image={product.image ? urlFor(product.image).width(500).url() : '/garbage-bins-hero.jpg'}
                                 iconType="trash"
                             />
                         ))}
+
                     </div>
                 </Container>
             </Section>
@@ -232,6 +265,8 @@ export default function PlasticGarbageBinsPage() {
                 </Container>
             </Section>
 
+            <SectionDivider />
+
             <Section>
                 <Container size="md">
                     <div className={styles.sectionHeader}>
@@ -248,6 +283,8 @@ export default function PlasticGarbageBinsPage() {
                     </div>
                 </Container>
             </Section>
+
+            <SectionDivider />
 
             <Section background="primary" className={styles.cta}>
                 <Container>
